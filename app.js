@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 //Moongose
 const mongoose = require("mongoose");
 mongoose.connect(
-    "mongodb+srv://josue:deliveryroot21@clusterdeliveryapp.dpizc.mongodb.net/deliveryApp?retryWrites=true&w=majority"
+    "MONGOURI"
 );
 mongoose.set("debug", true);
 
