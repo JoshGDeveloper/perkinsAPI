@@ -1,0 +1,36 @@
+//Importación de la biblioteca mongoose
+const mongoose = require('mongoose');
+
+//Definicion del esquema
+const PedidoSchema = new mongoose.Schema({
+    fecha: {
+        type: Date,
+        required: true
+    },
+    platos:{
+        type: [{idPlato: mongoose.Schema.Types.ObjectId, cantidad: mongoose.Schema.Types.Decimal128}],
+        ref: 'Plato',
+        required: true
+    },
+    importe: {
+        type: mongoose.Schema.Types.Decimal128
+    },
+    estado: {
+        type: String,
+        enum: ['abierto', 'preparando', 'entregado'],
+        required: true
+    }
+}, {timestamps: true, collection: 'pedidos'});
+
+//Datos publicos del pedido
+PedidoSchema.methods.publicData = function(){
+    return{
+        id: this.id,
+        fecha: this.fecha,
+        platos: this.platos,
+        importe: this. importe,
+        estado: this.estado
+    };
+};
+
+mongoose.model("Pedido", PedidoSchema);
