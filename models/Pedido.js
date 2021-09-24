@@ -8,8 +8,10 @@ const PedidoSchema = new mongoose.Schema({
         required: true
     },
     platos:{
-        type: [{idPlato: mongoose.Schema.Types.ObjectId, cantidad: mongoose.Schema.Types.Decimal128}],
-        ref: 'Plato',
+        type: [ { idPlato: {type: mongoose.Schema.Types.ObjectId, ref: 'Plato', required: true}, 
+            cantidad: {type: mongoose.Schema.Types.Decimal128, required: true} 
+          }
+        ],
         required: true
     },
     importe: {
@@ -19,6 +21,11 @@ const PedidoSchema = new mongoose.Schema({
         type: String,
         enum: ['abierto', 'preparando', 'entregado'],
         required: true
+    },
+    cliente:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Cliente', 
+        required: true
     }
 }, {timestamps: true, collection: 'pedidos'});
 
@@ -27,6 +34,7 @@ PedidoSchema.methods.publicData = function(){
     return{
         id: this.id,
         fecha: this.fecha,
+        cliente: this.cliente,
         platos: this.platos,
         importe: this. importe,
         estado: this.estado

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 //Moongose
 const mongoose = require("mongoose");
 mongoose.connect(
-  "mongouri"
+  "mongodb"
 );
 mongoose.set("debug", true);
 

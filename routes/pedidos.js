@@ -8,6 +8,7 @@ const{
 } = require('../controllers/pedidos');
 
 router.get('/',obtenerPedido);
+router.get('/:id',obtenerPedido);
 router.post('/',crearPedido);
 router.put('/:id', modificarPedido);
 router.delete('/:id', eliminarPedido);
