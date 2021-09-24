@@ -7,6 +7,7 @@ const {
 } = require('../controllers/platos');
 
 router.get('/',obtenerPlato);
+router.get('/:id',obtenerPlato);
 router.post('/',crearPlato);
 router.put('/:id', modificarPlato);
 router.delete('/:id', eliminarPlato);
