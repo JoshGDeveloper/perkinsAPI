@@ -17,7 +17,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 
 mongoose.connect(
   process.env.MONGODB_URI, // obtiene la url de conexión desde las variables de entorno
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}
 );
 
 mongoose.set("debug", true);
