@@ -10,9 +10,16 @@ app.use(bodyParser.json());
 
 //Moongose
 const mongoose = require("mongoose");
+// mongoose.connect(
+//   "mongodb+srv://josue:deliveryroot21@clusterdeliveryapp.dpizc.mongodb.net/deliveryApp?retryWrites=true&w=majority"
+// );
+var isProduction = process.env.NODE_ENV === 'production';
+
 mongoose.connect(
-  "mongodb"
+  process.env.MONGODB_URI, // obtiene la url de conexión desde las variables de entorno
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
+
 mongoose.set("debug", true);
 
 //Modelos
@@ -25,6 +32,13 @@ require('./models/Receta');
 app.use('/v1', require('./routes'));
 
 //Iniciamos el servidor
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Server is listening on port ${PORT}`);
+// });
+// Iniciando el servidor...
+var server = app.listen(process.env.PORT, function () {
+  console.log(process.env.MONGODB_URI);
+  console.log(process.env.NODE_ENV);
+  console.log('Escuchando en el puerto ' + server.address().port);
 });
+
