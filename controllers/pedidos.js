@@ -63,9 +63,54 @@ function eliminarPedido(req, res, next) {
   });
 }
 
+//-----------Limite de registros
+function limitar(req, res, next) {
+  const limite = parseInt(req.params.limite);
+  Pedido.aggregate([
+    {
+      $limit: limite,
+    },
+  ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
+}
+
+//-------Consulta por campos
+function consultarCampos(req, res, next) {
+  let nuevaInfo = req.body;
+  const project = {};
+  project._id = 0;
+  if (typeof nuevaInfo.id !== "undefined" && nuevaInfo.id === 1)
+    project._id = nuevaInfo.id;
+  if (typeof nuevaInfo.fecha !== "undefined" && nuevaInfo.fecha === 1)
+    project.fecha = nuevaInfo.fecha;
+  if (typeof nuevaInfo.cliente !== "undefined" && nuevaInfo.cliente === 1)
+    project.cliente = nuevaInfo.cliente;
+  if (typeof nuevaInfo.platos !== "undefined" && nuevaInfo.platos === 1)
+    project.platos = nuevaInfo.platos;
+  if (typeof nuevaInfo.importe !== "undefined" && nuevaInfo.importe === 1)
+    project.importe = nuevaInfo.importe;
+  if (typeof nuevaInfo.estado !== "undefined" && nuevaInfo.estado === 1)
+    project.estado = nuevaInfo.estado;
+
+  Pedido.aggregate([
+    {
+      $project: project,
+    },
+  ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
+}
+
 module.exports = {
   crearPedido,
   obtenerPedido,
   modificarPedido,
   eliminarPedido,
+  limitar,
+  consultarCampos
 };

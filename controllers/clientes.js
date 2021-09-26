@@ -98,7 +98,7 @@ function limitar(req, res, next) {
 function consultaCampos(req, res, next) {
   let nuevaInfo = req.body;
   const project = {};
-
+  project._id=0;
   if (typeof nuevaInfo.id !== "undefined" && nuevaInfo.id === 1)
     project._id = nuevaInfo.id;
   if (typeof nuevaInfo.email !== "undefined" && nuevaInfo.email === 1)
