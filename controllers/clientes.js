@@ -24,11 +24,26 @@ function obtenerCliente(req, res, next) {
       })
       .catch(next);
   } else {
-    Cliente.find()
-      .then((clientes) => {
-        res.send(clientes);
-      })
-      .catch(next);
+    // Cliente.find()
+    //   .then((clientes) => {
+    //     res.send(clientes);
+    //   })
+    //   .catch(next);
+    Cliente.aggregate([
+      {
+        '$project': {
+          '_id': 1, 
+          'email': 1, 
+          'nombre': 1, 
+          'direccion': 1, 
+          'telefono': 1
+        }
+      }
+    ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
   }
 }
 
@@ -66,16 +81,44 @@ function eliminarCliente(req, res, next) {
 }
 
 //-----------Limite de registros
-function limitar(req, res, next){
+function limitar(req, res, next) {
   const limite = parseInt(req.params.limite);
   Cliente.aggregate([
     {
-      '$limit': limite
-    }
-  ]
-  ).then( r => {
-    res.status(200).send(r)
-  }).catch(next)
+      $limit: limite,
+    },
+  ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
+}
+
+//-------Consulta por campos
+function consultaCampos(req, res, next) {
+  let nuevaInfo = req.body;
+  const project = {};
+
+  if (typeof nuevaInfo.id !== "undefined" && nuevaInfo.id === 1)
+    project._id = nuevaInfo.id;
+  if (typeof nuevaInfo.email !== "undefined" && nuevaInfo.email === 1)
+    project.email = nuevaInfo.email;
+  if (typeof nuevaInfo.nombre !== "undefined" && nuevaInfo.nombre === 1)
+    project.nombre = nuevaInfo.nombre;
+  if (typeof nuevaInfo.direccion !== "undefined" && nuevaInfo.direccion === 1)
+    project.direccion = nuevaInfo.direccion;
+  if (typeof nuevaInfo.telefono !== "undefined" && nuevaInfo.telefono === 1)
+    project.telefono = nuevaInfo.telefono;
+
+  Cliente.aggregate([
+    {
+      $project: project,
+    },
+  ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
 }
 
 module.exports = {
@@ -83,5 +126,6 @@ module.exports = {
   obtenerCliente,
   modificarCliente,
   eliminarCliente,
-  limitar
+  limitar,
+  consultaCampos,
 };

@@ -5,10 +5,12 @@ const{
     obtenerCliente,
     modificarCliente,
     eliminarCliente,
-    limitar
+    limitar,
+    consultaCampos
 } = require('../controllers/clientes');
 
 router.get('/',obtenerCliente);
+router.get('/campos',consultaCampos);
 router.get('/limite/:limite',limitar);
 router.get('/:id',obtenerCliente);
 router.post('/',crearCliente);
