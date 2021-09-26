@@ -3,10 +3,12 @@ const {
     crearPlato,
     obtenerPlato,
     modificarPlato,
-    eliminarPlato
+    eliminarPlato,
+    buscarPlato
 } = require('../controllers/platos');
 
 router.get('/',obtenerPlato);
+router.get('/pornombre/:nombre', buscarPlato);
 router.get('/:id',obtenerPlato);
 router.post('/',crearPlato);
 router.put('/:id', modificarPlato);

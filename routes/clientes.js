@@ -4,10 +4,12 @@ const{
     crearCliente,
     obtenerCliente,
     modificarCliente,
-    eliminarCliente
+    eliminarCliente,
+    limitar
 } = require('../controllers/clientes');
 
 router.get('/',obtenerCliente);
+router.get('/limite/:limite',limitar);
 router.get('/:id',obtenerCliente);
 router.post('/',crearCliente);
 router.put('/:id', modificarCliente);

@@ -69,9 +69,24 @@ function eliminarPlato(req, res, next) {
   });
 }
 
+//--------Busqueda por nombre
+function buscarPlato(req, res, next){
+  const nombre = req.params.nombre;
+  Plato.aggregate([
+    {
+      '$match': {
+        'nombre': new RegExp(nombre)
+      }
+    }
+  ]).then( r => {
+    res.status(200).send(r)
+  }).catch(next)
+}
+
 module.exports = {
   crearPlato,
   obtenerPlato,
   modificarPlato,
   eliminarPlato,
+  buscarPlato
 };
