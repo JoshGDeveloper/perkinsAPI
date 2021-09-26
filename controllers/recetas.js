@@ -59,9 +59,24 @@ function eliminarReceta(req, res, next) {
   });
 }
 
+//-----------Limite de registros
+function limitar(req, res, next) {
+  const limite = parseInt(req.params.limite);
+  Receta.aggregate([
+    {
+      $limit: limite,
+    },
+  ])
+    .then((r) => {
+      res.status(200).send(r);
+    })
+    .catch(next);
+}
+
 module.exports = {
   crearReceta,
   obtenerReceta,
   modificarReceta,
   eliminarReceta,
+  limitar
 };
