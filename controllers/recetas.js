@@ -24,7 +24,14 @@ function obtenerReceta(req, res, next) {
       })
       .catch(next);
   } else {
-    Receta.find()
+    Receta.aggregate([
+      {
+        '$project': {
+          '_id': 1, 
+          'ingredientes': 1
+        }
+      }
+    ])
       .then((recetas) => {
         res.send(recetas);
       })
@@ -64,8 +71,13 @@ function limitar(req, res, next) {
   const limite = parseInt(req.params.limite);
   Receta.aggregate([
     {
-      $limit: limite,
-    },
+      '$project': {
+        '_id': 1, 
+        'ingredientes': 1
+      }
+    }, {
+      '$limit': 5
+    }
   ])
     .then((r) => {
       res.status(200).send(r);
