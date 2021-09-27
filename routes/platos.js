@@ -4,10 +4,14 @@ const {
     obtenerPlato,
     modificarPlato,
     eliminarPlato,
-    buscarPlato
+    buscarPlato,
+    limitar,
+    consultarCampos
 } = require('../controllers/platos');
 
 router.get('/',obtenerPlato);
+router.get('/campos',consultarCampos);
+router.get('/limite/:limite',limitar);
 router.get('/pornombre/:nombre', buscarPlato);
 router.get('/:id',obtenerPlato);
 router.post('/',crearPlato);
