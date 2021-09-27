@@ -82,6 +82,8 @@ function consultarCampos(req, res, next) {
   let nuevaInfo = req.body;
   const project = {};
   project._id = 0;
+  project.createdAt = 0;
+  project.updatedAt = 0;
   if (typeof nuevaInfo.id !== "undefined" && nuevaInfo.id === 1)
     project._id = nuevaInfo.id;
   if (typeof nuevaInfo.fecha !== "undefined" && nuevaInfo.fecha === 1)
