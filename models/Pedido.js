@@ -9,7 +9,7 @@ const PedidoSchema = new mongoose.Schema({
     },
     platos:{
         type: [ { 
-            plato: {type: mongoose.Schema.Types.Decimal128, required: true}, 
+            plato: {type: String, required: true}, 
             cantidad: {type: mongoose.Schema.Types.Decimal128, required: true},
             precio:  {type: mongoose.Schema.Types.Decimal128, required: true},
             subtotal: {type: mongoose.Schema.Types.Decimal128, required: true}
