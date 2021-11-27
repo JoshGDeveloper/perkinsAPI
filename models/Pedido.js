@@ -8,8 +8,11 @@ const PedidoSchema = new mongoose.Schema({
         required: true
     },
     platos:{
-        type: [ { idPlato: {type: mongoose.Schema.Types.ObjectId, ref: 'Plato', required: true}, 
-            cantidad: {type: mongoose.Schema.Types.Decimal128, required: true} 
+        type: [ { 
+            plato: {type: mongoose.Schema.Types.Decimal128, required: true}, 
+            cantidad: {type: mongoose.Schema.Types.Decimal128, required: true},
+            precio:  {type: mongoose.Schema.Types.Decimal128, required: true},
+            subtotal: {type: mongoose.Schema.Types.Decimal128, required: true}
           }
         ],
         required: true

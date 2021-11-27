@@ -23,6 +23,10 @@ const PlatoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Number,
         required: true
     },
+    imagen:{
+        type: String,
+        required: true
+    },
     idReceta: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Receta',
