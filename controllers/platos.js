@@ -30,7 +30,8 @@ const platoConReceta = [
       'tiempoPreparacion': 1, 
       'calorias': 1, 
       'porciones': 1, 
-      'ingredientes': 1
+      'ingredientes': 1,
+      'imagen': 1
     }
   }
 ];

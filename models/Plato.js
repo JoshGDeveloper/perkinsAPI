@@ -43,6 +43,7 @@ PlatoSchema.methods.publicData = function (){
         tiempoPreparacion: this.tiempoPreparacion,
         calorias: this.calorias,
         porciones: this.porciones,
+        imagen: this.imagen,
         idReceta: this.idReceta
     };
 };
