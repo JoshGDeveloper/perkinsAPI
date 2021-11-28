@@ -1,7 +1,9 @@
 //Express
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 4001;
+
 
 //Bodyparser
 const bodyParser = require('body-parser');
@@ -29,6 +31,7 @@ require('./models/Plato');
 require('./models/Receta');
 
 //Configurando las rutas
+app.use(cors());
 app.use('/v1', require('./routes'));
 
 //Iniciamos el servidor
