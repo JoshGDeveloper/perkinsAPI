@@ -10,7 +10,7 @@ API creada para el correcto funcionamiento del proyecto TACO DELIVERY.
 
 ## Caracteristicas
 
-###Lista de: 
+### Lista de: 
 * Clientes 
 * Pedidos
 * Plato
