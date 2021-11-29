@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //Moongose
 const mongoose = require("mongoose");
 // mongoose.connect(
-//   "mongodb+srv://josue:deliveryroot21@clusterdeliveryapp.dpizc.mongodb.net/deliveryApp?retryWrites=true&w=majority"
+//   "mongodb+srv://LIGA DE LA BD "
 // );
 var isProduction = process.env.NODE_ENV === 'production';
 
